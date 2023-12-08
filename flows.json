@@ -1,0 +1,540 @@
+[
+    {
+        "id": "66ef2c8defaff1d1",
+        "type": "subflow",
+        "name": "Subflow 2",
+        "info": "",
+        "category": "",
+        "in": [],
+        "out": [],
+        "env": [],
+        "meta": {
+            "module": "node-red-contrib-crash-detection-v1",
+            "type": "crashdetection",
+            "version": "0.0.1",
+            "author": "Lukas s19cc3@umwelt-campus.de",
+            "desc": "A node for crash detection of microcontrollers",
+            "keywords": "node-red,crash-detection",
+            "license": "Apache-2.0"
+        },
+        "color": "#DDAA99"
+    },
+    {
+        "id": "76ad4cfc4eb4f76e",
+        "type": "ui_colour_picker",
+        "z": "66ef2c8defaff1d1",
+        "name": "",
+        "label": "",
+        "group": "16330c9b87f8bb78",
+        "format": "hex",
+        "outformat": "string",
+        "showSwatch": true,
+        "showPicker": false,
+        "showValue": false,
+        "showHue": false,
+        "showAlpha": false,
+        "showLightness": true,
+        "square": "false",
+        "dynOutput": "false",
+        "order": 3,
+        "width": 2,
+        "height": 1,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 775,
+        "y": 94,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9f09b2f608b5eedc",
+        "type": "mqtt in",
+        "z": "66ef2c8defaff1d1",
+        "name": "handgeraet/ESP32/ready",
+        "topic": "handgeraet/ESP32/ready",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ee58939fe21aa3c7",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 195,
+        "y": 134,
+        "wires": [
+            [
+                "ea5045ebad8b3d39",
+                "c57e8a9a8e8f6615",
+                "f6c2d0e7949b6cca"
+            ]
+        ]
+    },
+    {
+        "id": "ea5045ebad8b3d39",
+        "type": "trigger",
+        "z": "66ef2c8defaff1d1",
+        "name": "Watchdog",
+        "op1": "",
+        "op2": "timeout",
+        "op1type": "nul",
+        "op2type": "str",
+        "duration": "12",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 335,
+        "y": 214,
+        "wires": [
+            [
+                "d05b550c427c49e4",
+                "ad37710f0825e5ea",
+                "c015d4beae374c13"
+            ]
+        ]
+    },
+    {
+        "id": "c57e8a9a8e8f6615",
+        "type": "function",
+        "z": "66ef2c8defaff1d1",
+        "name": "function 165",
+        "func": "msg.color = \"green\";\nmsg.payload = msg.color; // Set payload to the color value\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 515,
+        "y": 74,
+        "wires": [
+            [
+                "76ad4cfc4eb4f76e",
+                "c015d4beae374c13"
+            ]
+        ]
+    },
+    {
+        "id": "d05b550c427c49e4",
+        "type": "function",
+        "z": "66ef2c8defaff1d1",
+        "name": "function 166",
+        "func": "msg.color = \"red\";\nmsg.payload = msg.color; // Set payload to the color value\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 515,
+        "y": 114,
+        "wires": [
+            [
+                "76ad4cfc4eb4f76e"
+            ]
+        ]
+    },
+    {
+        "id": "d015d7590ad77596",
+        "type": "ui_text",
+        "z": "66ef2c8defaff1d1",
+        "group": "16330c9b87f8bb78",
+        "order": 23,
+        "width": 4,
+        "height": 1,
+        "name": "",
+        "label": "Status:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 735,
+        "y": 194,
+        "wires": []
+    },
+    {
+        "id": "f6c2d0e7949b6cca",
+        "type": "function",
+        "z": "66ef2c8defaff1d1",
+        "name": "function 167",
+        "func": "msg.color = \"green\";\nmsg.payload = \"Verbunden\"; // Set payload to the color value\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 515,
+        "y": 194,
+        "wires": [
+            [
+                "d015d7590ad77596"
+            ]
+        ]
+    },
+    {
+        "id": "ad37710f0825e5ea",
+        "type": "function",
+        "z": "66ef2c8defaff1d1",
+        "name": "function 168",
+        "func": "msg.color = \"red\";\nmsg.payload = \"Getrennt\"; // Set payload to the color value\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 515,
+        "y": 234,
+        "wires": [
+            [
+                "d015d7590ad77596"
+            ]
+        ]
+    },
+    {
+        "id": "98d1cf205449931c",
+        "type": "mqtt in",
+        "z": "66ef2c8defaff1d1",
+        "name": "handgeraet/ESP32/data",
+        "topic": "handgeraet/ESP32/data",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "ee58939fe21aa3c7",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 195,
+        "y": 94,
+        "wires": [
+            [
+                "ea5045ebad8b3d39",
+                "c57e8a9a8e8f6615",
+                "f6c2d0e7949b6cca"
+            ]
+        ]
+    },
+    {
+        "id": "c015d4beae374c13",
+        "type": "function",
+        "z": "66ef2c8defaff1d1",
+        "name": "function 169",
+        "func": "var timer = context.get(\"timer\") || false;\n\nif (msg.payload == \"timeout\") {\n    // Starte den Watchdog-Timer\n    var msg1 = { payload: 0 };\n    var msg4 = { payload: \"Offline: \" + 0 + \" Seconds\" };\n    context.set(\"timer\", true);\n    var msg5 = { payload: [\"Offline\",new Date] };\n    return [msg4,msg1,,msg5];\n    // Wenn eine andere Nachricht kommt\n} \n\nif (msg.payload === \"green\") {\n    // Starte den Watchdog-Timer\n    var msg2 = { payload: null };\n    if(timer){\n        context.set(\"timer\", false);\n        var msg5 = { payload: [\"Online\", new Date] };\n        return [msg2, ,msg2];\n    }else{\n        return [msg2, , ];\n    }\n} \n\nif(timer){\n    var msg3 = { payload: msg.payload +1 };\n    var msg4 = { payload: \"Offline: \" + msg3.payload + \" Seconds\"};\n    return [msg4, msg3,];\n}",
+        "outputs": 4,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 695,
+        "y": 334,
+        "wires": [
+            [
+                "762942d5afff7db3"
+            ],
+            [
+                "1759a6d8e4b51d0d"
+            ],
+            [
+                "5f94714f6f661eac",
+                "cccd1a722242e5e7"
+            ],
+            [
+                "20bd68de6f848e60"
+            ]
+        ]
+    },
+    {
+        "id": "1759a6d8e4b51d0d",
+        "type": "delay",
+        "z": "66ef2c8defaff1d1",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 715,
+        "y": 434,
+        "wires": [
+            [
+                "c015d4beae374c13"
+            ]
+        ]
+    },
+    {
+        "id": "762942d5afff7db3",
+        "type": "ui_text",
+        "z": "66ef2c8defaff1d1",
+        "group": "16330c9b87f8bb78",
+        "order": 6,
+        "width": 5,
+        "height": 1,
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 875,
+        "y": 274,
+        "wires": []
+    },
+    {
+        "id": "5f94714f6f661eac",
+        "type": "function",
+        "z": "66ef2c8defaff1d1",
+        "name": "Check_Crash",
+        "func": "var inoperation = global.get(\"global_inoperation\");\nvar data = global.get(\"global_savedata\");\nvar recursivestop = global.get(\"recusivestop\");\nif (inoperation && data[0] == 0 ){\n    if ( recursivestop == false){\n        return [msg, ,];\n    }else{\n        global.set(\"myArray\", []);\n    }\n\n}\nelse if (inoperation && data[0] == 1){\n    msg.payload = data;\n    if (recursivestop == false) {\n        return [,msg ,];\n    } else {\n        global.set(\"myArray\", []);\n    }\n}\nelse if (inoperation == false && data[0] == 1) {\n    return [,,msg];\n}\n",
+        "outputs": 3,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 995,
+        "y": 494,
+        "wires": [
+            [
+                "c9bba5eb30267c0f",
+                "923e6aed4b6037df"
+            ],
+            [
+                "3ae8dce3c7d7ddd0",
+                "923e6aed4b6037df"
+            ],
+            [
+                "b8104908518e9ef9"
+            ]
+        ]
+    },
+    {
+        "id": "c9bba5eb30267c0f",
+        "type": "function",
+        "z": "66ef2c8defaff1d1",
+        "name": "Single",
+        "func": "global.set(\"myArray\", []);\nglobal.set(\"recusivestop\", true);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1195,
+        "y": 454,
+        "wires": [
+            [
+                "202f7d6743f7ff9a"
+            ]
+        ]
+    },
+    {
+        "id": "3ae8dce3c7d7ddd0",
+        "type": "function",
+        "z": "66ef2c8defaff1d1",
+        "name": "Complete+inoperation",
+        "func": "var data = global.get(\"global_savedata\");\nglobal.set(\"gloabl_restart\",true);\nglobal.set(\"myArray\", []);\nglobal.set(\"recusivestop\", true);\n\nvar completefunctionlist = [...data[2]];\nvar counter = data[1][1];\n\nfor (var i = 0; i < counter; i++) {\n    var index = completefunctionlist.indexOf(1);\n    if (index !== -1) {\n        completefunctionlist[index] = 0;\n    } else {\n        break;\n    }\n}\ndata[5] = completefunctionlist;\nglobal.set(\"global_savedata\",data);\n\nmsg.payload = data;\nreturn msg; ",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1275,
+        "y": 494,
+        "wires": [
+            [
+                "a785976052cfe0a5"
+            ]
+        ]
+    },
+    {
+        "id": "b8104908518e9ef9",
+        "type": "function",
+        "z": "66ef2c8defaff1d1",
+        "name": "Complete+ not inoperation",
+        "func": "var data = global.get(\"global_savedata\");\nglobal.set(\"gloabl_restart\", true);\nglobal.set(\"myArray\", []);\nglobal.set(\"recusivestop\", true);\n\nvar completefunctionlist = [...data[2]];\nvar counter = data[1][1];\n\nfor (var i = 0; i < counter; i++) {\n    var index = completefunctionlist.indexOf(1);\n    if (index !== -1) {\n        completefunctionlist[index] = 0;\n    } else {\n        break;\n    }\n}\ndata[5] = completefunctionlist;\nglobal.set(\"global_savedata\", data);\n\nmsg.payload = data;\nreturn msg; ",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1315,
+        "y": 534,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cccd1a722242e5e7",
+        "type": "debug",
+        "z": "66ef2c8defaff1d1",
+        "name": "debug 51",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 975,
+        "y": 414,
+        "wires": []
+    },
+    {
+        "id": "923e6aed4b6037df",
+        "type": "debug",
+        "z": "66ef2c8defaff1d1",
+        "name": "debug 52",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1255,
+        "y": 354,
+        "wires": []
+    },
+    {
+        "id": "202f7d6743f7ff9a",
+        "type": "debug",
+        "z": "66ef2c8defaff1d1",
+        "name": "debug 53",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1415,
+        "y": 434,
+        "wires": []
+    },
+    {
+        "id": "a785976052cfe0a5",
+        "type": "debug",
+        "z": "66ef2c8defaff1d1",
+        "name": "debug 54",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1435,
+        "y": 474,
+        "wires": []
+    },
+    {
+        "id": "20bd68de6f848e60",
+        "type": "function",
+        "z": "66ef2c8defaff1d1",
+        "name": "function 170",
+        "func": "\nvar offlinedata = context.get(\"offlinedata\") || [];\n\n\nofflinedata.push(msg.payload);\ncontext.set(\"offlinedata\",offlinedata);\n\n\n\n\nvar tabledata = [];\n\nfor (var i = 0; i < offlinedata.length; i++) {\n    var row = {\n        \"Offline\": offlinedata[i][1],\n    };\n    tabledata.push(row);\n}\n\n// Set the table as payload\nmsg.payload = tabledata;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 955,
+        "y": 554,
+        "wires": [
+            [
+                "61b548281eafe86f"
+            ]
+        ]
+    },
+    {
+        "id": "61b548281eafe86f",
+        "type": "ui_table",
+        "z": "66ef2c8defaff1d1",
+        "group": "566e7a873d59fb84",
+        "name": "",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 1155,
+        "y": 594,
+        "wires": []
+    },
+    {
+        "id": "16330c9b87f8bb78",
+        "type": "ui_group",
+        "name": "Overview",
+        "tab": "7963f2a5e4ed6a70",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ee58939fe21aa3c7",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "http://192.168.3.50/",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "5",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "566e7a873d59fb84",
+        "type": "ui_group",
+        "name": "Crash Control",
+        "tab": "7963f2a5e4ed6a70",
+        "order": 13,
+        "disp": true,
+        "width": 12,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "7963f2a5e4ed6a70",
+        "type": "ui_tab",
+        "name": "BME688",
+        "icon": "dashboard",
+        "order": 5,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "fe4d3ee0b652d5f0",
+        "type": "subflow:66ef2c8defaff1d1",
+        "z": "cb667c883079e67b",
+        "name": "crash-detection",
+        "x": 3740,
+        "y": 3480,
+        "wires": []
+    }
+]
